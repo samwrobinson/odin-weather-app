@@ -39,15 +39,15 @@ async function formatWrittenDate(date) {
 
 function getWeatherIcon(condition) {
     const conditionToIconMap = {
-        "Partially cloudy": './weather_icons/animated/cloudy-day-1.svg',
-        "Rain, Partially cloudy": './weather_icons/animated/rainy-3.svg',
-        "Clear": './weather_icons/animated/day.svg',
-        "Overcast": './weather_icons/animated/cloudy.svg',
-        "Mist": './weather_icons/animated/rainy-5.svg',
-        "Rain": './weather_icons/animated/rainy-5.svg'
+        "Partially cloudy": '/odin-weather-app/weather_icons/animated/cloudy-day-1.svg',
+        "Rain, Partially cloudy": '/odin-weather-app/weather_icons/animated/rainy-3.svg',
+        "Clear": '/odin-weather-app/weather_icons/animated/day.svg',
+        "Overcast": '/odin-weather-app/weather_icons/animated/cloudy.svg',
+        "Mist": '/odin-weather-app/weather_icons/animated/rainy-5.svg',
+        "Rain": '/odin-weather-app/weather_icons/animated/rainy-5.svg'
     };
 
-    return conditionToIconMap[condition] || './weather_icons/animated/day.svg'; // Fallback to a default icon if condition is not found
+    return conditionToIconMap[condition] || '/odin-weather-app/weather_icons/animated/day.svg';
 }
 
 
