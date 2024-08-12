@@ -39,15 +39,15 @@ async function formatWrittenDate(date) {
 
 function getWeatherIcon(condition) {
     const conditionToIconMap = {
-        "Partially cloudy": './images/weather_icons/animated/cloudy-day-1.svg',
-        "Rain, Partially cloudy": './images/weather_icons/animated/rainy-3.svg',
-        "Clear": './images/weather_icons/animated/day.svg',
-        "Overcast": './images/weather_icons/animated/cloudy.svg',
-        "Mist": './images/weather_icons/animated/rainy-5.svg',
-        "Rain": './images/weather_icons/animated/rainy-5.svg'
+        "Partially cloudy": './weather_icons/animated/cloudy-day-1.svg',
+        "Rain, Partially cloudy": './weather_icons/animated/rainy-3.svg',
+        "Clear": './weather_icons/animated/day.svg',
+        "Overcast": './weather_icons/animated/cloudy.svg',
+        "Mist": './weather_icons/animated/rainy-5.svg',
+        "Rain": './weather_icons/animated/rainy-5.svg'
     };
 
-    return conditionToIconMap[condition] || '/images/weather_icons/animated/day.svg'; // Fallback to a default icon if condition is not found
+    return conditionToIconMap[condition] || './weather_icons/animated/day.svg'; // Fallback to a default icon if condition is not found
 }
 
 
