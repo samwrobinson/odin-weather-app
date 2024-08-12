@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- ============================================ -->
+<!--                 Navigation                   -->
+<!-- ============================================ -->
+
+<header id="cs-navigation">
+    <div class="cs-container">
+        <!--Nav Logo-->
+        <!--Logo is turned white in the css with a filter on dark mode-->
+        <a href="" class="cs-logo" aria-label="back to home">
+            <img src="/weather_icons/animated/day.svg" alt="logo" width="210" height="29" aria-hidden="true" decoding="async">
+        </a>
+        <!--Navigation List-->
+        <nav class="cs-nav" role="navigation">
+            <!--Mobile Nav Toggle-->
+            <button class="cs-toggle" aria-label="mobile menu toggle">
+                <div class="cs-box" aria-hidden="true">
+                    <span class="cs-line cs-line1" aria-hidden="true"></span>
+                    <span class="cs-line cs-line2" aria-hidden="true"></span>
+                    <span class="cs-line cs-line3" aria-hidden="true"></span>
+                </div>
+            </button>
+            <!-- We need a wrapper div so we can set a fixed height on the cs-ul in case the nav list gets too long from too many dropdowns being opened and needs to have an overflow scroll. This wrapper acts as the background so it can go the full height of the screen and not cut off any overflowing nav items while the cs-ul stops short of the bottom of the screen, which keeps all nav items in view no matter how mnay there are-->
+            <div class="cs-ul-wrapper">
+                <p>Search:</p>
+                <ul id="growing-search-freebie">
+                    <li>
+                      <!-- Start Freebie Markup -->
+                      <div class="growing-search">
+                        <div class="input">
+                          <input type="text" name="search"/>
+                        </div><!-- Space hack --><div>
+                            <button class="submit">
+                                <?xml version="1.0" encoding="iso-8859-1"?>
+                                <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools -->
+                                <svg fill="#000000" height="800px" width="800px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                    viewBox="0 0 490.4 490.4" xml:space="preserve">
+                                <g>
+                                    <path d="M484.1,454.796l-110.5-110.6c29.8-36.3,47.6-82.8,47.6-133.4c0-116.3-94.3-210.6-210.6-210.6S0,94.496,0,210.796
+                                        s94.3,210.6,210.6,210.6c50.8,0,97.4-18,133.8-48l110.5,110.5c12.9,11.8,25,4.2,29.2,0C492.5,475.596,492.5,463.096,484.1,454.796z
+                                        M41.1,210.796c0-93.6,75.9-169.5,169.5-169.5s169.6,75.9,169.6,169.5s-75.9,169.5-169.5,169.5S41.1,304.396,41.1,210.796z"/>
+                                </g>
+                                </svg>
+                            </button>
+                            <span class="fa fa-search"></span>
+                          </button>
+                        </div>
+                      </div>
+                      <!-- End Freebie Markup -->
+                    </li>
+                  </ul>
+            </div>
+        </nav>
+        <div class="cs-contact-group">
+            <p>Current Location:</p>
+        </div>
+        <!--Dark Mode toggle, uncomment button code if you want to enable a dark mode toggle-->
+        <!-- <button id="dark-mode-toggle" aria-label="dark mode toggle">
+            <svg class="cs-moon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 480" style="enable-background:new 0 0 480 480" xml:space="preserve"><path d="M459.782 347.328c-4.288-5.28-11.488-7.232-17.824-4.96-17.76 6.368-37.024 9.632-57.312 9.632-97.056 0-176-78.976-176-176 0-58.4 28.832-112.768 77.12-145.472 5.472-3.712 8.096-10.4 6.624-16.832S285.638 2.4 279.078 1.44C271.59.352 264.134 0 256.646 0c-132.352 0-240 107.648-240 240s107.648 240 240 240c84 0 160.416-42.688 204.352-114.176 3.552-5.792 3.04-13.184-1.216-18.496z"/></svg>
+            <img class="cs-sun" aria-hidden="true" src="https://csimg.nyc3.cdn.digitaloceanspaces.com/Icons%2Fsun.svg" decoding="async" alt="moon" width="15" height="15">
+        </button> -->
+    </div>
+</header>
+
+<!-- ============================================ -->
+<!--                   Gallery                    -->
+<!-- ============================================ -->
+
+<section id="gallery-402">
+    <div class="cs-container">
+        <div class="cs-content">
+            <span class="cs-topper">Welcome</span>
+            <h2 class="cs-title">To Sam's Weather Channel</h2>
+            <p class="cs-text">
+                Let us help you plan your day.
+            </p>
+        </div>
+        <div class="cs-gallery">
+            <!--Picture 1-->
+            <div class="weather-tile">
+                <h2>Current Conditions:</h2>
+                <h3 id="location"></h3>
+                <div class="temp-icon">
+                    <img src="" class="current-cond-icon" alt="weather icon">
+                    <h3 class="temperature"></h3>
+                </div>
+                <p class="description"></p>
+            </div>
+            <!--Picture 2-->
+            <div class="weather-tile">
+                <h2 id="tomorrow"></h2>
+                <div class="temp-icon" class="tomorrow">
+                    <img src="" class="current-cond-icon" id="tomorrow-icon" alt="weather icon">
+                    <h3 class="temperature" id="tomorrow-temp"></h3>
+                </div>
+                <p class="description" id="tomorrow-description"></p>
+            </div>
+            <!--Picture 3-->
+            <div class="weather-tile">
+                <h2 id="next-day"></h2>
+                <div class="temp-icon" class="tomorrow">
+                    <img src="" class="current-cond-icon" id="next-day-icon" alt="weather icon">
+                    <h3 class="temperature" id="next-day-temp"></h3>
+                </div>
+                <p class="description" id="next-day-description"></p>
+            </div>
+            <!--Picture 4-->
+            <div class="weather-tile">
+                <p>test</p>
+            </div>
+            <!--Picture 5-->
+            <div class="weather-tile">
+                <p>test</p>
+            </div>
+            <!--Picture 6-->
+            <div class="weather-tile">
+                <p>test</p>
+            </div>
+        </div>
+    </div>
+</section>
+                                
+                                
+    <script src="script.js"></script>
+</body>
+</html>
