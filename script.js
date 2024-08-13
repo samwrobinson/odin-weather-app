@@ -11,6 +11,7 @@ function searchAddress() {
     searchBar.value = '';
 }
 
+// Function to update URL based on Search
 function updateUrl(arr) {
     let urlLocationTag = arr.join('%20');
     return urlLocationTag;    
@@ -18,6 +19,13 @@ function updateUrl(arr) {
 
 submit.addEventListener('click', searchAddress);
 
+searchBar.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        searchAddress();
+    }
+});
+
+// Load Weather Data as JSON
 async function getWeather() {
     const response = await fetch(url);
     const weatherData = await response.json();
@@ -37,6 +45,7 @@ async function formatWrittenDate(date) {
     return dateString.toLocaleDateString('en-US', options);
 }
 
+// Weather Icon map
 function getWeatherIcon(condition) {
     const conditionToIconMap = {
         "Partially cloudy": './weather_icons/animated/cloudy-day-1.svg',
@@ -51,6 +60,16 @@ function getWeatherIcon(condition) {
 }
 
 
+// Parse hourly data for future use
+async function getHourlyData() {
+    const response = await fetch(url);
+    const weatherData = await response.json();
+    const hours = weatherData.days[0].hours;
+    return hours;
+}
+
+
+// DOM Manipulation
 async function populateTiles() {
     const weatherData = await getWeather();
 
@@ -61,7 +80,7 @@ async function populateTiles() {
 
     //Current conditions tile
     location.textContent =  `${weatherData.resolvedAddress}`;
-    description.textContent = `${weatherData.description}`;
+    description.textContent = `${weatherData.days[0].description}`;
 
     // Convert to degrees F
     const tempInFahrenheit = celsiusToFahrenheit(weatherData.currentConditions.temp);
@@ -97,10 +116,62 @@ async function populateTiles() {
     nextDay.textContent = `${nextDayDate}`;
 
     nextDayIcon.src = getWeatherIcon(weatherData.days[3].conditions);
-    const nextDayMinTempCalc = Math.round(celsiusToFahrenheit(weatherData.days[3].tempmin));
-    const nextDayHighTempCalc =  Math.round(celsiusToFahrenheit(weatherData.days[3].tempmax));
     nextDayTemp.textContent = 'Min: ' + tomorrowMinTempCalc.toString() + '°F' + '     ' + 'High: ' + tomorrowHighTempCalc.toString() + '°F';
     nextDayDesc.textContent = `${weatherData.days[3].description}`;
+
+    // Hourly Forecast
+    const hourlyForecast = document.querySelector('.hourly-weather');
+    hourlyForecast.innerHTML = '';
+    const hourlyData = await getHourlyData();
+    console.log(hourlyData);
+
+    for (let i=0; i<hourlyData.length; i++) {
+        let tile = document.createElement('div');
+        tile.classList.add('hourly-tile');
+        const time = document.createElement('p');
+        const icon = document.createElement('img');
+        const temp = document.createElement('p');
+        const precipitation = document.createElement('div')
+        const precipIcon = document.createElement('img');
+        const precipPercentage = document.createElement('p');
+        const precipAmount = document.createElement('p');
+        const iconSpan = document.createElement('span')
+        precipPercentage.classList.add('precip-percent');
+        precipAmount.classList.add('precip-amount')
+
+        let tempInFahrenheit = celsiusToFahrenheit(hourlyData[i].temp)
+        let roundedTemp = Math.round(tempInFahrenheit);
+
+        time.textContent = hourlyData[i].datetime;
+        icon.src = getWeatherIcon(hourlyData[i].conditions)
+        temp.textContent = roundedTemp + ' °F';
+        precipIcon.src = './rain.svg';
+        iconSpan.appendChild(precipIcon);
+        precipPercentage.textContent = `${hourlyData[i].precipprob.toString()}%`;
+        precipAmount.textContent = `${Math.round(hourlyData[i].precip).toString()} "`;
+        precipitation.appendChild(iconSpan);
+        precipitation.appendChild(precipPercentage);
+        precipitation.appendChild(precipAmount);
+        tile.appendChild(time);
+        tile.appendChild(icon);
+        tile.appendChild(temp);
+        tile.appendChild(precipitation);
+        hourlyForecast.appendChild(tile);
+    }
+
+    // // Weather Alerts
+    // const alertTile = document.querySelector('#weather-alerts');
+    // let weatherAlerts = weatherData.alerts;
+
+    // for (let i=0; i<weatherAlerts.length; i++) {
+    //     if (weatherAlerts.length === 0) {
+    //         let text = document.createElement('p');
+    //         text.textContent = 'No alerts in your area.';
+    //         alertTile.appendChild(text);
+    //     } else {
+
+    //     }
+    // }
 }
 
 populateTiles();
