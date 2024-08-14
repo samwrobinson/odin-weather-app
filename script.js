@@ -59,6 +59,32 @@ function getWeatherIcon(condition) {
     return conditionToIconMap[condition] || './weather_icons/animated/day.svg'; // Fallback to a default icon if condition is not found
 }
 
+async function findWeatherAlerts() {
+    const weatherAlerts = document.querySelector('#weather-alerts');
+    const weatherData = await getWeather();
+    const alerts = weatherData.alerts;
+
+    weatherAlerts.innerHTML = '';
+
+    if (alerts.length === 0) {
+        const noAlerts = document.createElement('p');
+        noAlerts.textContent = 'There are currently no weather alerts in your area.'
+        weatherAlerts.appendChild(noAlerts);
+    } else {
+        alerts.forEach(alert => {
+            if (alert) {
+                const alertHeader = document.createElement('h3');
+                const alertItem = document.createElement('p');
+                alertItem.classList.add('alert-item');
+                alertHeader.textContent = alert.headline;
+                alertItem.textContent = alert.description;
+                weatherAlerts.appendChild(alertHeader);
+                weatherAlerts.appendChild(alertItem)                
+            }
+        });
+    }
+}
+
 
 // Parse hourly data for future use
 async function getHourlyData() {
@@ -68,10 +94,20 @@ async function getHourlyData() {
     return hours;
 }
 
+function convertToStandardTime(militaryTime) {
+    let [hours, minutes] = militaryTime.split(':');
+    hours = parseInt(hours);
+
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12 || 12; // Convert 0 to 12 for 12 AM
+    return `${hours}:${minutes} ${ampm}`;
+}
 
 // DOM Manipulation
 async function populateTiles() {
     const weatherData = await getWeather();
+
+    findWeatherAlerts();
 
     const location = document.querySelector('#location');
     const temperature = document.querySelector('.temperature');
@@ -102,7 +138,7 @@ async function populateTiles() {
     tomorowIcon.src = getWeatherIcon(weatherData.days[2].conditions);
     const tomorrowMinTempCalc = Math.round(celsiusToFahrenheit(weatherData.days[2].tempmin));
     const tomorrowHighTempCalc =  Math.round(celsiusToFahrenheit(weatherData.days[2].tempmax));
-    tomorrowTemp.textContent = 'Min: ' + tomorrowMinTempCalc.toString() + '°F' + '     ' + 'High: ' + tomorrowHighTempCalc.toString() + '°F';
+    tomorrowTemp.textContent = 'Low: ' + tomorrowMinTempCalc.toString() + '°F' + '     ' + 'High: ' + tomorrowHighTempCalc.toString() + '°F';
     tomorrowDesc.textContent = `${weatherData.days[2].description}`
     
     // Next day tile
@@ -116,7 +152,7 @@ async function populateTiles() {
     nextDay.textContent = `${nextDayDate}`;
 
     nextDayIcon.src = getWeatherIcon(weatherData.days[3].conditions);
-    nextDayTemp.textContent = 'Min: ' + tomorrowMinTempCalc.toString() + '°F' + '     ' + 'High: ' + tomorrowHighTempCalc.toString() + '°F';
+    nextDayTemp.textContent = 'Low: ' + tomorrowMinTempCalc.toString() + '°F' + '     ' + 'High: ' + tomorrowHighTempCalc.toString() + '°F';
     nextDayDesc.textContent = `${weatherData.days[3].description}`;
 
     // Hourly Forecast
@@ -142,7 +178,7 @@ async function populateTiles() {
         let tempInFahrenheit = celsiusToFahrenheit(hourlyData[i].temp)
         let roundedTemp = Math.round(tempInFahrenheit);
 
-        time.textContent = hourlyData[i].datetime;
+        time.textContent = convertToStandardTime(hourlyData[i].datetime);
         icon.src = getWeatherIcon(hourlyData[i].conditions)
         temp.textContent = roundedTemp + ' °F';
         precipIcon.src = './rain.svg';
@@ -158,20 +194,6 @@ async function populateTiles() {
         tile.appendChild(precipitation);
         hourlyForecast.appendChild(tile);
     }
-
-    // // Weather Alerts
-    // const alertTile = document.querySelector('#weather-alerts');
-    // let weatherAlerts = weatherData.alerts;
-
-    // for (let i=0; i<weatherAlerts.length; i++) {
-    //     if (weatherAlerts.length === 0) {
-    //         let text = document.createElement('p');
-    //         text.textContent = 'No alerts in your area.';
-    //         alertTile.appendChild(text);
-    //     } else {
-
-    //     }
-    // }
 }
 
 populateTiles();
@@ -188,21 +210,7 @@ CShamburgerMenu.addEventListener('click', function() {
     CShamburgerMenu.classList.toggle("cs-active");
     CSnavbarMenu.classList.toggle("cs-active");
     CSbody.classList.toggle("cs-open");
-    // run the function to check the aria-expanded value
-    ariaExpanded();
 });
-
-// checks the value of aria expanded on the cs-ul and changes it accordingly whether it is expanded or not 
-function ariaExpanded() {
-    const csUL = document.querySelector('#cs-expanded');
-    const csExpanded = csUL.getAttribute('aria-expanded');
-
-    if (csExpanded === 'false') {
-        csUL.setAttribute('aria-expanded', 'true');
-    } else {
-        csUL.setAttribute('aria-expanded', 'false');
-    }
-}
 
     // This script adds a class to the body after scrolling 100px
 // and we used these body.scroll styles to create some on scroll 

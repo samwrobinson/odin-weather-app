@@ -58,7 +58,12 @@ p, h1, h2, h3, h4, h5 {
 h1, h2, h3, h4, h5 {
   font-family: 'Montserrat', sans-serif;
 }
-
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  padding-top: 3rem;
+}
 p {
   font-family: 'Montserrat', sans-serif;
 }
@@ -323,64 +328,6 @@ p {
       transform: translateY(-70/16rem);
       transition: transform 0.6s, opacity 0.9s;
     }
-    #cs-navigation .cs-li:nth-of-type(1) {
-      transition-delay: 0.05s;
-    }
-    #cs-navigation .cs-li:nth-of-type(2) {
-      transition-delay: 0.1s;
-    }
-    #cs-navigation .cs-li:nth-of-type(3) {
-      transition-delay: 0.15s;
-    }
-    #cs-navigation .cs-li:nth-of-type(4) {
-      transition-delay: 0.2s;
-    }
-    #cs-navigation .cs-li:nth-of-type(5) {
-      transition-delay: 0.25s;
-    }
-    #cs-navigation .cs-li:nth-of-type(6) {
-      transition-delay: 0.3s;
-    }
-    #cs-navigation .cs-li:nth-of-type(7) {
-      transition-delay: 0.35s;
-    }
-    #cs-navigation .cs-li:nth-of-type(8) {
-      transition-delay: 0.4s;
-    }
-    #cs-navigation .cs-li:nth-of-type(9) {
-      transition-delay: 0.45s;
-    }
-    #cs-navigation .cs-li:nth-of-type(10) {
-      transition-delay: 0.5s;
-    }
-    #cs-navigation .cs-li:nth-of-type(11) {
-      transition-delay: 0.55s;
-    }
-    #cs-navigation .cs-li:nth-of-type(12) {
-      transition-delay: 0.6s;
-    }
-    #cs-navigation .cs-li:nth-of-type(13) {
-      transition-delay: 0.65s;
-    }
-    #cs-navigation .cs-li-link {
-      /* 16px - 24px */
-      font-size: clamp(1rem, 2.5vw, 1.5rem);
-      line-height: 1.2em;
-      text-decoration: none;
-      margin: 0;
-      color: var(--headerColor);
-      display: inline-block;
-      position: relative;
-    }
-    #cs-navigation .cs-li-link.cs-active {
-      color: var(--primary);
-    }
-    #cs-navigation .cs-li-link:hover {
-      color: var(--primary);
-    }
-    #cs-navigation .cs-button-solid {
-      display: none;
-    }
   }
   /* Tablet - 768px */
   @media only screen and (min-width: 48rem) {
@@ -388,168 +335,7 @@ p {
       display: block;
     }
   }
-  /*-- -------------------------- -->
-  <---     Navigation Dropdown    -->
-  <--- -------------------------- -*/
-  /* Mobile - 1023px */
-  @media only screen and (max-width: 63.9375rem) {
-    #cs-navigation .cs-li {
-      text-align: center;
-      width: 100%;
-      display: block;
-    }
-    #cs-navigation .cs-dropdown {
-      color: var(--bodyTextColorWhite);
-      position: relative;
-    }
-    #cs-navigation .cs-dropdown.cs-active .cs-drop-ul {
-      height: auto;
-      margin: 0.75rem 0 0 0;
-      padding: 0.75rem 0;
-      opacity: 1;
-      visibility: visible;
-    }
-    #cs-navigation .cs-dropdown.cs-active .cs-drop-link {
-      opacity: 1;
-    }
-    #cs-navigation .cs-dropdown .cs-li-link {
-      position: relative;
-      transition: opacity 0.3s;
-    }
-    #cs-navigation .cs-drop-icon {
-      width: 0.9375rem;
-      height: auto;
-      position: absolute;
-      top: 50%;
-      right: -1.25rem;
-      transform: translateY(-50%);
-    }
-    #cs-navigation .cs-drop-ul {
-      width: 100%;
-      height: 0;
-      margin: 0;
-      padding: 0;
-      background-color: var(--primary);
-      opacity: 0;
-      display: flex;
-      visibility: hidden;
-      flex-direction: column;
-      justify-content: flex-start;
-      align-items: center;
-      gap: 0.75rem;
-      overflow: hidden;
-      transition: padding 0.3s, margin 0.3s, height 0.3s, opacity 0.3s, visibility 0.3s;
-    }
-    #cs-navigation .cs-drop-li {
-      list-style: none;
-    }
-    #cs-navigation .cs-li-link.cs-drop-link {
-      /* 14px - 16px */
-      font-size: clamp(0.875rem, 2vw, 1.25rem);
-      color: #fff;
-    }
-  }
-  /* Desktop - 1024px */
-  @media only screen and (min-width: 64rem) {
-    #cs-navigation .cs-dropdown {
-      position: relative;
-    }
-    #cs-navigation .cs-dropdown:hover {
-      cursor: pointer;
-    }
-    #cs-navigation .cs-dropdown:hover .cs-drop-ul {
-      opacity: 1;
-      visibility: visible;
-      transform: scaleY(1);
-    }
-    #cs-navigation .cs-dropdown:hover .cs-drop-li {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    #cs-navigation .cs-drop-icon {
-      width: 0.9375rem;
-      height: auto;
-      display: inline-block;
-    }
-    #cs-navigation .cs-drop-ul {
-      min-width: 12.5rem;
-      margin: 0;
-      padding: 0;
-      background-color: #fff;
-      box-shadow: inset rgba(149, 157, 165, 0.1) 0px 8px 10px;
-      opacity: 0;
-      border-bottom: 5px solid var(--primary);
-      border-radius: 0 0 1.5rem 1.5rem;
-      visibility: hidden;
-      /* if you have 8 or more links in your dropdown nav, uncomment the columns property to make the list into 2 even columns. Change it to 3 or 4 if you need extra columns. Then remove the transition delays on the cs-drop-li so they don't have weird scattered animations */
-      position: absolute;
-      top: 100%;
-      z-index: -100;
-      overflow: hidden;
-      transform: scaleY(0);
-      transition: transform 0.3s, visibility 0.3s, opacity 0.3s;
-      transform-origin: top;
-    }
-    #cs-navigation .cs-drop-li {
-      font-size: 1rem;
-      text-decoration: none;
-      list-style: none;
-      width: 100%;
-      height: auto;
-      opacity: 0;
-      display: block;
-      transform: translateY(-0.625rem);
-      transition: opacity 0.6s, transform 0.6s;
-    }
-    #cs-navigation .cs-drop-li:nth-of-type(1) {
-      transition-delay: 0.05s;
-    }
-    #cs-navigation .cs-drop-li:nth-of-type(2) {
-      transition-delay: 0.1s;
-    }
-    #cs-navigation .cs-drop-li:nth-of-type(3) {
-      transition-delay: 0.15s;
-    }
-    #cs-navigation .cs-drop-li:nth-of-type(4) {
-      transition-delay: 0.2s;
-    }
-    #cs-navigation .cs-drop-li:nth-of-type(5) {
-      transition-delay: 0.25s;
-    }
-    #cs-navigation .cs-drop-li:nth-of-type(6) {
-      transition-delay: 0.3s;
-    }
-    #cs-navigation .cs-drop-li:nth-of-type(7) {
-      transition-delay: 0.35s;
-    }
-    #cs-navigation .cs-drop-li:nth-of-type(8) {
-      transition-delay: 0.4s;
-    }
-    #cs-navigation .cs-drop-li:nth-of-type(9) {
-      transition-delay: 0.45s;
-    }
-    #cs-navigation .cs-li-link.cs-drop-link {
-      font-size: 1rem;
-      line-height: 1.5em;
-      text-transform: capitalize;
-      text-decoration: none;
-      white-space: nowrap;
-      width: 100%;
-      /* prevents padding from affecting height and width */
-      box-sizing: border-box;
-      padding: 0.75rem;
-      color: var(--headerColor);
-      display: block;
-      transition: color 0.3s, background-color 0.3s;
-    }
-    #cs-navigation .cs-li-link.cs-drop-link:hover {
-      color: var(--bodyTextColorWhite);
-      background-color: var(--primary);
-    }
-    #cs-navigation .cs-li-link.cs-drop-link:before {
-      display: none;
-    }
-  }
+  
   /*-- -------------------------- -->
   <---     Desktop Navigation     -->
   <--- -------------------------- -*/
@@ -759,6 +545,12 @@ p {
   }
   /* Large Desktop - 1300px */
   @media only screen and (min-width: 81.25rem) {
+    ul {
+      padding-top: 0;
+    }
+    .growing-search .input input:focus {
+      width: 250px;
+    }
     #cs-navigation .cs-social {
       display: flex;
     }
@@ -825,6 +617,14 @@ p {
         align-items: center;
         padding: 2rem;
     }
+    #gallery-402 .weather-tile .info-container {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+    #gallery-402 .weather-tile .info-container p {
+      width: 100%;
+  }
     #gallery-402 #hourly-weather {
       display: flex;
       flex-direction: row; /* Horizontal layout */
@@ -875,9 +675,7 @@ p {
      .temp-icon {
       display: flex;
       flex-direction: column;
-      width: 100%;
-      height: 90%;
-      margin-bottom: 1rem;
+      margin-bottom: 2rem;
     }
     .temp-icon .tomorrow {
       height: 90%;
@@ -886,8 +684,6 @@ p {
       height: fit-content;
     }
     #gallery-402 .weather-tile img {
-        height: 90%;
-        width: 50%;
         margin: 0 25%;
         /* makes it act like a background image */
         object-fit: cover;
@@ -899,28 +695,61 @@ p {
     #gallery-402 .weather-tile .temp-icon #tomorrow-temp {
       height: 50%;
     }
-}
+    #gallery-402 .weather-tile .info-container #weather-alerts {
+      margin-top: 2rem;
+    }
+    #gallery-402 .weather-tile:nth-of-type(4) {
+      overflow: auto;
+    }
+    /* For the entire scrollbar */
+    #gallery-402 .weather-tile:nth-of-type(4)::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+
+    /* Track of the scrollbar */
+    #gallery-402 .weather-tile:nth-of-type(4)::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 10px;
+    }
+
+    /* Handle of the scrollbar (the draggable part) */
+    #gallery-402 .weather-tile:nth-of-type(4)::-webkit-scrollbar-thumb {
+      background: #888;
+      border-radius: 10px;
+    }
+
+    /* Handle on hover */
+    #gallery-402 .weather-tile:nth-of-type(4)::-webkit-scrollbar-thumb:hover {
+      background: #555; /* Darker color on hover */
+    }
+    }
 /* Tablet - 768px */
 @media only screen and (min-width: 48rem) {
     #gallery-402 .cs-container {
         max-width: 80rem;
     }
     #gallery-402 .weather-tile {
-        width: 31.8%;
+        width: 45%;
         max-width: 18.75rem;
         aspect-ratio: 1;
+        padding: 1rem;
     }
     #gallery-402 #hourly-weather {
-      width: 31.8%;
+      width: 45%;
       max-width: 18.75rem;
       aspect-ratio: 1;
     }
     .temp-icon {
       display: flex;
       flex-direction: column;
-      width: 100%;
-      height: 70%;
     }
+    #gallery-402 .weather-tile img {
+      max-height: 80px;
+      margin: 0 25%;
+      /* makes it act like a background image */
+      object-fit: cover;
+  }
 }
 /* Desktop - 1300px */
 @media only screen and (min-width: 81.25rem) {
@@ -932,6 +761,7 @@ p {
         width: 39.375rem;
         max-width: 100%;
         height: 25rem;
+        text-align: center;
     }
     #gallery-402 #hourly-weather {
       min-width: 39.375rem;
@@ -949,6 +779,7 @@ p {
       height: 50%;
     }
     #gallery-402 .weather-tile img {
+      max-height: none;
       height: 100%;
       width: 50%;
       margin: 0 25%;
@@ -990,15 +821,20 @@ p {
 }
 
 .growing-search {
+  display: flex;
+  width: 90%;
+  margin: 0 5%;
   padding: 5px 5px 5px 7px;
   border-radius: 5px;
   background: #fff;
   box-shadow: rgba(116, 181, 247, 0.2) 0px 8px 24px;
 }
 
-.growing-search div {
+.growing-search .input {
   display: inline-block;
   font-size: 12px;
+  width: 100%;
+  height: 100%;
 }
 
 .growing-search .input input {
@@ -1009,7 +845,7 @@ p {
   padding-top: 5px;
   padding-left: 5px;
   padding-bottom: 5px;
-  width: 125px;
+  width: 150px;
   color: #aaa;
   border-bottom: 1px solid #eee;
 }
