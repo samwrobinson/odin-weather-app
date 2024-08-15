@@ -609,6 +609,7 @@ p {
         box-shadow: rgb(251, 251, 251) 0px 0px 9px 0px;
         border: solid 1px rgba(250, 249, 246);
         width: 100%;
+        min-width: 343px;
         aspect-ratio: 1;
         /* clips the image corners */
         overflow: hidden;
@@ -674,8 +675,9 @@ p {
      }     
      .temp-icon {
       display: flex;
+      width: 100%;
       flex-direction: column;
-      margin-bottom: 2rem;
+      margin-bottom: 1rem;
     }
     .temp-icon .tomorrow {
       height: 90%;
@@ -685,6 +687,8 @@ p {
     }
     #gallery-402 .weather-tile img {
         margin: 0 25%;
+        height: 100%;
+        width: 50%;
         /* makes it act like a background image */
         object-fit: cover;
     }
@@ -745,7 +749,7 @@ p {
       flex-direction: column;
     }
     #gallery-402 .weather-tile img {
-      max-height: 80px;
+      max-height: 130px;
       margin: 0 25%;
       /* makes it act like a background image */
       object-fit: cover;
@@ -761,6 +765,7 @@ p {
         width: 39.375rem;
         max-width: 100%;
         height: 25rem;
+        min-width: 305px;
         text-align: center;
     }
     #gallery-402 #hourly-weather {
@@ -777,6 +782,7 @@ p {
     }
     .temp-icon {
       height: 50%;
+      margin-bottom: 2rem;
     }
     #gallery-402 .weather-tile img {
       max-height: none;
