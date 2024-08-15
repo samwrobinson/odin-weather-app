@@ -103,6 +103,18 @@ function convertToStandardTime(militaryTime) {
     return `${hours}:${minutes} ${ampm}`;
 }
 
+function feelsLikeColor(element, temp) {
+    if (temp >= 85) {
+        element.style.color = 'red';
+    } else if (temp >= 70) {
+        element.style.color = 'orange';
+    } else if (temp >= 50) {
+        element.style.color = 'green';
+    } else {
+        element.style.color = 'blue';
+    }
+}
+
 // DOM Manipulation
 async function populateTiles() {
     const weatherData = await getWeather();
@@ -194,6 +206,15 @@ async function populateTiles() {
         tile.appendChild(precipitation);
         hourlyForecast.appendChild(tile);
     }
+
+    // Feels Like tab
+    const feelsLikeTempContianer = document.querySelector('.feels-like-temp');
+    const feelsLikeTemp = celsiusToFahrenheit(weatherData.currentConditions.feelslike);
+    const roundedFeelsLike = Math.round(feelsLikeTemp);
+    
+    feelsLikeColor(feelsLikeTempContianer, roundedFeelsLike);
+
+    feelsLikeTempContianer.textContent = roundedFeelsLike.toString() + ' ' + '°F';
 }
 
 populateTiles();

@@ -686,6 +686,10 @@ p {
     .temp-icon #tomorrow-temp {
       height: fit-content;
     }
+    .feels-like-temp {
+      font-size: 5rem;
+      margin-top: 2rem;
+    }
     #gallery-402 .weather-tile img {
         margin: 0 25%;
         height: 100%;
