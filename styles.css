@@ -639,9 +639,9 @@ p {
     }
     #hourly-weather .hourly-tile {
       min-width: 100px;
-      height: 90%; 
+      max-height: 277px;
+      height: 100%;
       margin-right: 10px;
-      margin: 5% 10px 5% 0;
       background-color: #fff;
       border: solid 1px rgba(250, 249, 246);
       box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -745,6 +745,9 @@ p {
       max-width: 18.75rem;
       aspect-ratio: 1;
     }
+    #gallery-402 #hourly-weather .hourly-tile {
+      max-height: none;
+    }
     .temp-icon {
       display: flex;
       flex-direction: column;
@@ -795,11 +798,6 @@ p {
   }
   #gallery-402 .weather-tile {
     padding: 2.5rem;
-  }
-  #gallery-402 #hourly-weather .hourly-tile {
-    min-width: 100px;
-    height: 100%; 
-    margin: 0 10px 0 0;
   }
   .description {
     margin-top: 1rem;
